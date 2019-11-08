@@ -13,8 +13,11 @@
     "bootstrap-vue": "^2.0.4",
     "core-js": "^3.1.2",
     "mdbvue": "^6.0.0",
+    "v-shopping-cart": "^1.0.0",
     "vue": "^2.6.10",
+    "vue-axios": "^2.1.5",
     "vue-fixed-header": "^3.2.4",
+    "vue-js-modal": "^1.3.31",
     "vue-router": "^3.0.6",
     "vuex": "^3.0.1"
   },

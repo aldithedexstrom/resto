@@ -5,7 +5,12 @@ import store from "./store";
 import BootstrapVue from "bootstrap-vue";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
+import axios from "axios";
+import VueAxios from "vue-axios";
+import VModal from "vue-js-modal";
 
+Vue.use(VModal);
+Vue.use(VueAxios, axios);
 Vue.use(BootstrapVue);
 Vue.config.productionTip = false;
 

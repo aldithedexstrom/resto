@@ -4,6 +4,24 @@
     <div class="text-right mb-3">
       <a href="/user/login" class="btn btn-primary">LOGIN</a>
     </div>
+    <div class="w-50 mx-auto">
+      <div class="form-group"></div>
+    </div>
+    <div>
+      <div class="form-group">
+        <input type="text" class="form-control" v-model="id" placeholder="ID" />
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" v-model="name" placeholder="Nama" />
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" v-model="image" placeholder="Image" />
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" v-model="harga" placeholder="Harga" />
+      </div>
+    </div>
+    <button class="btn btn-primary mb-4" @click="addDrink">Tambah Minuman</button>
     <b-navbar type="dark" variant="dark" class="fixed-top">
       <b-navbar-nav>
         <b-nav-item>
@@ -30,13 +48,15 @@
     <b-row>
       <b-card
         class="mx-3"
-        v-for="(el, index) in minuman"
+        v-for="(el, index) in drinks"
         :key="index"
         :title="el.name"
         :img-src="el.image"
         style="max-width: 23rem"
       >
-        <b-card-text>{{ el.harga }}</b-card-text>
+        <b-card-text>Rp. {{ el.harga }}</b-card-text>
+        <button class="btn btn-sm btn-success mb-4">Tambah ke Keranjang</button>
+        <button class="btn btn-sm btn-danger mb-4" @click="deleteDrink(drink)">Hapus Minuman</button>
       </b-card>
     </b-row>
   </div>
@@ -46,27 +66,61 @@
 export default {
   data() {
     return {
+      id: "",
+      name: "",
+      image: "",
+      harga: "",
       title: "Menu Minuman",
-      minuman: [
-        {
-          name: "Es Jeruk",
-          image:
-            "https://ecs7.tokopedia.net/img/cache/700/product-1/2018/12/27/5073465/5073465_883456c2-4b44-41f6-b654-d3ad4b172b28_700_700.jpg",
-          harga: "Rp. 7500"
-        },
-        {
-          name: "Jus Mangga",
-          image:
-            "https://s0.bukalapak.com/img/5276210033/w-1000/images__11_.jpeg",
-          harga: "Rp. 15000"
-        },
-        {
-          name: "Jus Jambu",
-          image: "https://pbs.twimg.com/media/EBvgaSEUcAAhUoG.jpg",
-          harga: "Rp. 75000"
-        }
-      ]
+      drinks: [{}]
     };
+  },
+  methods: {
+    onshowBorder() {
+      this.showBorder = true;
+    },
+    getDrinks() {
+      let api = "http://localhost:3000/drinks";
+      this.axios
+        .get(api)
+        .then(drinks => {
+          console.log("SUCCESS", drinks.data.data);
+          this.drinks = drinks.data.data;
+        })
+        .catch(err => {
+          console.log("ERROR", err);
+        });
+    },
+    addDrink() {
+      let newDrink = {
+        name: this.name,
+        image: this.image,
+        harga: this.harga
+      };
+      let api = "http://localhost:3000/drinks";
+      this.axios
+        .post(api, newDrink)
+        .then(() => {
+          this.getDrinks();
+        })
+        .catch(err => {
+          console.log("ERROR", err);
+        });
+    },
+    deleteDrink(drink) {
+      let api = "http://localhost:3000/drinks/" + drink._id;
+      this.axios
+        .delete(api)
+        .then(drinks => {
+          console.log(drinks.data);
+          this.getDrinks();
+        })
+        .catch(err => {
+          console.log("ERROR", err);
+        });
+    }
+  },
+  created() {
+    this.getDrinks();
   }
 };
 </script>
