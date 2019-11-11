@@ -35,6 +35,7 @@
         </b-nav-item>
       </b-navbar-nav>
     </b-navbar>
+    <button @click="showCart">Test Makanan</button>
     <modal name="hello-world">hello, world!</modal>
     <b-nav tabs justified>
       <b-nav-item active>MAKANAN</b-nav-item>
@@ -53,10 +54,11 @@
         style="max-width: 23rem"
       >
         <b-card-text>Rp. {{ food.harga }}</b-card-text>
-        <button class="btn btn-sm btn-success mb-4">Tambah ke Keranjang</button>
+        <button class="btn btn-sm btn-success mb-4" @click="tambahMakan(food)">Tambah ke Keranjang</button>
         <button class="btn btn-sm btn-danger mb-4" @click="deleteFood(food)">Hapus Makanan</button>
       </b-card>
     </b-row>
+    <p>Cart ({{ keranjang }})</p>
   </div>
 </template>
 
@@ -69,6 +71,7 @@ export default {
       image: "",
       harga: "",
       title: "Menu Makanan",
+      keranjang: "0",
       foods: [
         {
           name: "Udang Bakar Madu Pedas",
@@ -82,6 +85,24 @@ export default {
   methods: {
     onshowBorder() {
       this.showBorder = true;
+    },
+    tambahMakan(item) {
+      this.keranjang++;
+      // Check LocalStorage Cart if localStorage not null created new localStoragecart
+      let cartData = localStorage.getItem("cart");
+      let items = [];
+      console.log(cartData);
+      if (cartData == null) {
+        console.log(true);
+        items.push(item);
+        localStorage.setItem("cart", JSON.stringify(items));
+      } else {
+        console.log(false);
+        items.push(item);
+        localStorage.setItem("cart", JSON.stringify(items));
+      }
+
+      // if localStorage Cart not null push new item to cart
     },
     getFoods() {
       let api = "http://localhost:3000/foods";
@@ -122,16 +143,16 @@ export default {
         .catch(err => {
           console.log("ERROR", err);
         });
+    },
+    showCart() {
+      this.$modal.show("hello-world");
+    },
+    hide() {
+      this.$modal.hide("hello-world");
     }
   },
   created() {
     this.getFoods();
-  },
-  show() {
-    this.$modal.show("hello-world");
-  },
-  hide() {
-    this.$modal.hide("hello-world");
   }
 };
 </script>
