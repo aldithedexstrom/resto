@@ -5,9 +5,10 @@
       <div class="form-group"></div>
     </div>
     <div>
-      <div class="form-group">
+      <!-- ID Tidak Perlu Ditampilkan -->
+      <!-- <div class="form-group">
         <input type="text" class="form-control" v-model="id" placeholder="ID" />
-      </div>
+      </div>-->
       <div class="form-group">
         <input type="text" class="form-control" v-model="name" placeholder="Nama" />
       </div>
@@ -35,8 +36,7 @@
         </b-nav-item>
       </b-navbar-nav>
     </b-navbar>
-    <button @click="showCart">Test Makanan</button>
-    <modal name="hello-world">hello, world!</modal>
+    <button class="btn btn-sm btn-success mb-4" @click="showCart">Cart ({{ keranjang }})</button>
     <b-nav tabs justified>
       <b-nav-item active>MAKANAN</b-nav-item>
       <b-nav-item>
@@ -58,7 +58,6 @@
         <button class="btn btn-sm btn-danger mb-4" @click="deleteFood(food)">Hapus Makanan</button>
       </b-card>
     </b-row>
-    <p>Cart ({{ keranjang }})</p>
   </div>
 </template>
 
@@ -96,11 +95,12 @@ export default {
         console.log(true);
         items.push(item);
         localStorage.setItem("cart", JSON.stringify(items));
-      } else {
-        console.log(false);
-        items.push(item);
-        localStorage.setItem("cart", JSON.stringify(items));
       }
+      //  else {
+      //   console.log(false);
+      //   items.push(item);
+      //   localStorage.setItem("cart", JSON.stringify(items));
+      // }
 
       // if localStorage Cart not null push new item to cart
     },
@@ -158,4 +158,5 @@ export default {
 </script>
 
 <style>
+@import url(https://fonts.googleapis.com/css?family=Bitter:400);
 </style>

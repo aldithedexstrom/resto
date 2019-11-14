@@ -95,6 +95,6 @@ export default {
 
 <style>
 .custom-tabel {
-  background-color: chocolate;
+  background-color: lemonchiffon;
 }
 </style>
