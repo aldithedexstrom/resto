@@ -1,10 +1,10 @@
 <template>
   <div>
     <h1>Bandung Seafood</h1>
-    <div class="w-50 mx-auto">
+    <div class="w-50 mx-auto" con>
       <div class="form-group"></div>
     </div>
-    <div>
+    <div class="container">
       <!-- ID Tidak Perlu Ditampilkan -->
       <!-- <div class="form-group">
         <input type="text" class="form-control" v-model="id" placeholder="ID" />

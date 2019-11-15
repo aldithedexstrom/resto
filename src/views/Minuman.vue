@@ -7,10 +7,10 @@
     <div class="w-50 mx-auto">
       <div class="form-group"></div>
     </div>
-    <div>
-      <div class="form-group">
+    <div class="container">
+      <!-- <div class="form-group">
         <input type="text" class="form-control" v-model="id" placeholder="ID" />
-      </div>
+      </div>-->
       <div class="form-group">
         <input type="text" class="form-control" v-model="name" placeholder="Nama" />
       </div>
